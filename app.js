@@ -1,11 +1,12 @@
 
 let button = document.getElementById("reiniciar");
 button.addEventListener("click",reset());
+let input_ = document.querySelector("#num");
 let attemps = 1;
 
 function asignText(selector_,text) {document.querySelector(selector_).innerHTML = text;}
 function numberSecretGen(range) {return (Math.ceil(Math.random()*range));}
-function reset() {numberSecret = numberSecretGen(10); asignText("h1","Juego del numero secreto"); asignText("p","Indica un numero del 1 al 10");button.setAttribute("disabled","true");}
+function reset() {numberSecret = numberSecretGen(10); asignText("h1","Juego del numero secreto"); asignText("p","Indica un numero del 1 al 10"); button.setAttribute("disabled","true"); input_.removeAttribute("disabled");}
 
 reset()
 
@@ -13,10 +14,14 @@ reset()
 function verifficNumber() {
     let numberUser = parseInt(document.querySelector("#num").value);
     if (numberUser == numberSecret) {
+
         asignText("h1","Has acertado");
         asignText("p",`Felicidades, acertaste en ${attemps}`+(attemps > 1 ? " intentos" : " intento"));
+        
         button.removeAttribute("disabled");
-        attemps = 0;
+        input_.setAttribute("disabled","true");
+        
+        attemps = 1;
     } else {
 
         attemps++;
